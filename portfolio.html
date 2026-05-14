@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Suisse+Int%27l+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --text: #e8e4dc;
+    --muted: #6a6660;
+    --accent: #c8b89a;
+    --accent-dim: #7a6f62;
+    --tag-active-bg: #c8b89a;
+    --tag-active-text: #0e0e0e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 3rem 4rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+
+  header h1 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+
+  header span {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ── FILTERS ── */
+  .filters-bar {
+    padding: 1.6rem 4rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: center;
+    background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .filter-label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  select {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    padding: 0.4rem 2rem 0.4rem 0.7rem;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    min-width: 140px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236a6660'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    transition: border-color 0.2s;
+  }
+
+  select:hover, select:focus {
+    border-color: var(--accent-dim);
+    outline: none;
+  }
+
+  select option {
+    background: #1a1a1a;
+    color: var(--text);
+  }
+
+  .filter-actions {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0.05rem;
+  }
+
+  .btn-reset {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-reset:hover {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+  }
+
+  /* ── RESULTS COUNT ── */
+  .results-bar {
+    padding: 1rem 4rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ── GRID ── */
+  .grid {
+    padding: 0.5rem 4rem 6rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2px;
+  }
+
+  .photo-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/2;
+    background: var(--surface);
+    cursor: pointer;
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: brightness(0.88);
+  }
+
+  .photo-card:hover img {
+    transform: scale(1.04);
+    filter: brightness(1);
+  }
+
+  .photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.2rem;
+    gap: 0.4rem;
+  }
+
+  .photo-card:hover .photo-overlay {
+    opacity: 1;
+  }
+
+  .overlay-title {
+    font-size: 1.05rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: #fff;
+  }
+
+  .overlay-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .meta-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(200,184,154,0.18);
+    color: var(--accent);
+    border: 1px solid rgba(200,184,154,0.3);
+    padding: 0.15rem 0.45rem;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    grid-column: 1/-1;
+    padding: 6rem 0;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .empty-state p:first-child {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.8rem;
+    color: var(--border);
+  }
+
+  .empty-state p:last-child {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(8,8,8,0.96);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .lightbox.open { display: flex; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .lightbox-inner {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .lightbox-inner img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  .lightbox-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .lightbox-title {
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  .lightbox-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.3rem;
+    transition: color 0.2s;
+  }
+
+  .lightbox-close:hover { color: var(--text); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    header, .filters-bar, .results-bar, .grid { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .filters-bar { gap: 0.8rem 1.2rem; }
+    select { min-width: 120px; }
+  }
+
+  /* ── HIDDEN ── */
+  .photo-card.hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Portfolio</h1>
+  <span>Film Photography Archive</span>
+</header>
+
+<div class="filters-bar">
+  <div class="filter-group">
+    <span class="filter-label">ISO</span>
+    <select id="f-iso" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>50</option>
+      <option>100</option>
+      <option>200</option>
+      <option>400</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Film Type</span>
+    <select id="f-film" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>Kodak Gold</option>
+      <option>Kodak UltraMax</option>
+      <option>Ilford</option>
+      <option>APX</option>
+      <option>Kodak Professional</option>
+      <option>CineFilm</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Year</span>
+    <select id="f-year" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>2021</option>
+      <option>2022</option>
+      <option>2023</option>
+      <option>2024</option>
+      <option>2025</option>
+      <option>2026</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Subject</span>
+    <select id="f-subject" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>Portrait</option>
+      <option>Landscape</option>
+      <option>Animals</option>
+      <option>Cities</option>
+      <option>Mountains</option>
+      <option>Water</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Location</span>
+    <select id="f-location" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>Colorado</option>
+      <option>Alps</option>
+      <option>Sweden</option>
+      <option>Brazil</option>
+      <option>Netherlands</option>
+      <option>Luxembourg</option>
+      <option>US East Coast</option>
+      <option>Austria</option>
+    </select>
+  </div>
+
+  <div class="filter-actions">
+    <button class="btn-reset" onclick="resetFilters()">Reset</button>
+  </div>
+</div>
+
+<div class="results-bar">
+  <span id="results-count">0 photos</span>
+</div>
+
+<div class="grid" id="grid">
+  <!-- Cards are injected by JS -->
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lb-img" src="" alt="">
+    <div class="lightbox-info">
+      <span class="lightbox-title" id="lb-title"></span>
+      <div class="lightbox-tags" id="lb-tags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────
+//  PHOTO DATA
+//  To add your own photos, add entries to this array.
+//  Replace the "src" URL with a direct link to your image
+//  (Google Photos direct link, Imgur, Dropbox, etc.)
+//  All other fields are the tag values for filtering.
+// ─────────────────────────────────────────────────────────
+const photos = [
+  {
+    title: "Morning Light",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+    iso: "100",
+    film: "Kodak Professional",
+    year: "2024",
+    subject: "Mountains",
+    location: "Alps"
+  },
+  {
+    title: "Old Town",
+    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+    iso: "400",
+    film: "Ilford",
+    year: "2023",
+    subject: "Cities",
+    location: "Netherlands"
+  },
+  {
+    title: "Golden Hour",
+    src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800",
+    iso: "200",
+    film: "Kodak Gold",
+    year: "2022",
+    subject: "Landscape",
+    location: "Colorado"
+  },
+  {
+    title: "River Bend",
+    src: "https://images.unsplash.com/photo-1439853949212-36089c89079b?w=800",
+    iso: "50",
+    film: "CineFilm",
+    year: "2025",
+    subject: "Water",
+    location: "Sweden"
+  },
+  {
+    title: "Street Portrait",
+    src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800",
+    iso: "400",
+    film: "Kodak UltraMax",
+    year: "2024",
+    subject: "Portrait",
+    location: "Brazil"
+  },
+  {
+    title: "Alpine Meadow",
+    src: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800",
+    iso: "100",
+    film: "APX",
+    year: "2023",
+    subject: "Landscape",
+    location: "Austria"
+  },
+  {
+    title: "City Fog",
+    src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800",
+    iso: "400",
+    film: "Ilford",
+    year: "2021",
+    subject: "Cities",
+    location: "US East Coast"
+  },
+  {
+    title: "Coastal Fox",
+    src: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=800",
+    iso: "200",
+    film: "Kodak Professional",
+    year: "2022",
+    subject: "Animals",
+    location: "Sweden"
+  },
+  {
+    title: "Grand Canal",
+    src: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800",
+    iso: "50",
+    film: "Kodak Gold",
+    year: "2024",
+    subject: "Water",
+    location: "Luxembourg"
+  },
+  {
+    title: "Snowy Peak",
+    src: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800",
+    iso: "100",
+    film: "APX",
+    year: "2025",
+    subject: "Mountains",
+    location: "Colorado"
+  },
+  {
+    title: "Quiet Street",
+    src: "https://images.unsplash.com/photo-1467803738586-46b7eb7b16a9?w=800",
+    iso: "400",
+    film: "CineFilm",
+    year: "2023",
+    subject: "Cities",
+    location: "Luxembourg"
+  },
+  {
+    title: "Sunlit Portrait",
+    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800",
+    iso: "200",
+    film: "Kodak UltraMax",
+    year: "2026",
+    subject: "Portrait",
+    location: "Netherlands"
+  }
+];
+
+// ─────────────────────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────────────────────
+function buildGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  photos.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    card.dataset.iso = p.iso;
+    card.dataset.film = p.film;
+    card.dataset.year = p.year;
+    card.dataset.subject = p.subject;
+    card.dataset.location = p.location;
+    card.innerHTML = `
+      <img src="${p.src}" alt="${p.title}" loading="lazy">
+      <div class="photo-overlay">
+        <span class="overlay-title">${p.title}</span>
+        <div class="overlay-meta">
+          <span class="meta-tag">${p.location}</span>
+          <span class="meta-tag">${p.year}</span>
+          <span class="meta-tag">${p.film}</span>
+          <span class="meta-tag">ISO ${p.iso}</span>
+        </div>
+      </div>
+    `;
+    card.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(card);
+  });
+  applyFilters();
+}
+
+// ─────────────────────────────────────────────────────────
+//  FILTER
+// ─────────────────────────────────────────────────────────
+function applyFilters() {
+  const iso      = document.getElementById('f-iso').value;
+  const film     = document.getElementById('f-film').value;
+  const year     = document.getElementById('f-year').value;
+  const subject  = document.getElementById('f-subject').value;
+  const location = document.getElementById('f-location').value;
+
+  const cards = document.querySelectorAll('.photo-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const match =
+      (!iso      || card.dataset.iso      === iso)      &&
+      (!film     || card.dataset.film     === film)     &&
+      (!year     || card.dataset.year     === year)     &&
+      (!subject  || card.dataset.subject  === subject)  &&
+      (!location || card.dataset.location === location);
+
+    card.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+
+  const count = document.getElementById('results-count');
+  count.textContent = `${visible} photo${visible !== 1 ? 's' : ''}`;
+}
+
+function resetFilters() {
+  ['f-iso','f-film','f-year','f-subject','f-location'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  applyFilters();
+}
+
+// ─────────────────────────────────────────────────────────
+//  LIGHTBOX
+// ─────────────────────────────────────────────────────────
+function openLightbox(idx) {
+  const p = photos[idx];
+  document.getElementById('lb-img').src = p.src;
+  document.getElementById('lb-title').textContent = p.title;
+  document.getElementById('lb-tags').innerHTML = [
+    `ISO ${p.iso}`, p.film, p.year, p.subject, p.location
+  ].map(t => `<span class="meta-tag">${t}</span>`).join('');
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lightbox-close')) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')});
+});
+
+// ─────────────────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────────────────
+buildGrid();
+</script>
+</body>
+</html>
