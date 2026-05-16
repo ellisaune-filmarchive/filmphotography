@@ -367,15 +367,40 @@
   </div>
 
   <div class="filter-group">
+    <span class="filter-label">Season</span>
+    <select id="f-season" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>Spring</option>
+      <option>Summer</option>
+      <option>Fall</option>
+      <option>Winter</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
     <span class="filter-label">Subject</span>
     <select id="f-subject" onchange="applyFilters()">
       <option value="">All</option>
       <option>Portrait</option>
       <option>Landscape</option>
       <option>Animals</option>
+      <option>Dogs</option>
       <option>Cities</option>
       <option>Mountains</option>
       <option>Water</option>
+      <option>Climbing</option>
+      <option>Geometric</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Style</span>
+    <select id="f-style" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>Framing</option>
+      <option>Black&amp;White</option>
+      <option>Nature</option>
+      <option>Macro</option>
     </select>
   </div>
 
@@ -383,14 +408,26 @@
     <span class="filter-label">Location</span>
     <select id="f-location" onchange="applyFilters()">
       <option value="">All</option>
-      <option>Colorado</option>
+      <option>US - Colorado</option>
       <option>Alps</option>
       <option>Sweden</option>
       <option>Brazil</option>
       <option>Netherlands</option>
       <option>Luxembourg</option>
-      <option>US East Coast</option>
+      <option>US - East Coast</option>
       <option>Austria</option>
+      <option>Belgium</option>
+      <option>US - Midwest</option>
+      <option>Fontainebleau</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Editing</span>
+    <select id="f-editing" onchange="applyFilters()">
+      <option value="">All</option>
+      <option>Raw</option>
+      <option>Edited</option>
     </select>
   </div>
 
@@ -429,112 +466,76 @@
 // ─────────────────────────────────────────────────────────
 const photos = [
   {
-    title: "Amsterdam Evening",
-    src: "https://photos.google.com/album/AF1QipPHLm9AwpKLL2YxAqSUK0aWxBevbZEEC8ydqMfz/photo/AF1QipMdPvKDhm-cpyxvM_wB8rlYtBR1Z6YEmhwCTOlv",
-    iso: "400",
-    film: "Kodak UltraMax",
-    year: "2026",
-    subject: "Water",
-    location: "Netherlands"
+    title: "Morning Light",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+    iso: "100", film: "Kodak Professional", year: "2024", season: "Winter",
+    subject: "Mountains", style: "Nature", location: "Alps", editing: "Raw"
   },
   {
     title: "Old Town",
     src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
-    iso: "400",
-    film: "Ilford",
-    year: "2023",
-    subject: "Cities",
-    location: "Netherlands"
+    iso: "400", film: "Ilford", year: "2023", season: "Fall",
+    subject: "Cities", style: "Framing", location: "Netherlands", editing: "Edited"
   },
   {
     title: "Golden Hour",
     src: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800",
-    iso: "200",
-    film: "Kodak Gold",
-    year: "2022",
-    subject: "Landscape",
-    location: "Colorado"
+    iso: "200", film: "Kodak Gold", year: "2022", season: "Summer",
+    subject: "Landscape", style: "Nature", location: "US - Colorado", editing: "Raw"
   },
   {
     title: "River Bend",
     src: "https://images.unsplash.com/photo-1439853949212-36089c89079b?w=800",
-    iso: "50",
-    film: "CineFilm",
-    year: "2025",
-    subject: "Water",
-    location: "Sweden"
+    iso: "50", film: "CineFilm", year: "2025", season: "Spring",
+    subject: "Water", style: "Nature", location: "Sweden", editing: "Edited"
   },
   {
     title: "Street Portrait",
     src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800",
-    iso: "400",
-    film: "Kodak UltraMax",
-    year: "2024",
-    subject: "Portrait",
-    location: "Brazil"
+    iso: "400", film: "Kodak UltraMax", year: "2024", season: "Summer",
+    subject: "Portrait", style: "Framing", location: "Brazil", editing: "Edited"
   },
   {
     title: "Alpine Meadow",
     src: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800",
-    iso: "100",
-    film: "APX",
-    year: "2023",
-    subject: "Landscape",
-    location: "Austria"
+    iso: "100", film: "APX", year: "2023", season: "Summer",
+    subject: "Landscape", style: "Black&White", location: "Austria", editing: "Raw"
   },
   {
     title: "City Fog",
     src: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800",
-    iso: "400",
-    film: "Ilford",
-    year: "2021",
-    subject: "Cities",
-    location: "US East Coast"
+    iso: "400", film: "Ilford", year: "2021", season: "Fall",
+    subject: "Cities", style: "Black&White", location: "US - East Coast", editing: "Edited"
   },
   {
     title: "Coastal Fox",
     src: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=800",
-    iso: "200",
-    film: "Kodak Professional",
-    year: "2022",
-    subject: "Animals",
-    location: "Sweden"
+    iso: "200", film: "Kodak Professional", year: "2022", season: "Spring",
+    subject: "Animals", style: "Nature", location: "Sweden", editing: "Raw"
   },
   {
     title: "Grand Canal",
     src: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800",
-    iso: "50",
-    film: "Kodak Gold",
-    year: "2024",
-    subject: "Water",
-    location: "Luxembourg"
+    iso: "50", film: "Kodak Gold", year: "2024", season: "Spring",
+    subject: "Water", style: "Framing", location: "Luxembourg", editing: "Edited"
   },
   {
     title: "Snowy Peak",
     src: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800",
-    iso: "100",
-    film: "APX",
-    year: "2025",
-    subject: "Mountains",
-    location: "Colorado"
+    iso: "100", film: "APX", year: "2025", season: "Winter",
+    subject: "Mountains", style: "Nature", location: "US - Colorado", editing: "Raw"
   },
   {
     title: "Quiet Street",
     src: "https://images.unsplash.com/photo-1467803738586-46b7eb7b16a9?w=800",
-    iso: "400",
-    film: "CineFilm",
-    year: "2023",
-    subject: "Cities",
-    location: "Luxembourg"
+    iso: "400", film: "CineFilm", year: "2023", season: "Fall",
+    subject: "Cities", style: "Framing", location: "Luxembourg", editing: "Edited"
   },
   {
     title: "Sunlit Portrait",
     src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800",
-    iso: "200",
-    film: "Kodak UltraMax",
-    year: "2026",
-    subject: "Portrait",
-    location: "Netherlands"
+    iso: "200", film: "Kodak UltraMax", year: "2026", season: "Summer",
+    subject: "Portrait", style: "Macro", location: "Netherlands", editing: "Raw"
   }
 ];
 
@@ -550,8 +551,11 @@ function buildGrid() {
     card.dataset.iso = p.iso;
     card.dataset.film = p.film;
     card.dataset.year = p.year;
+    card.dataset.season = p.season;
     card.dataset.subject = p.subject;
+    card.dataset.style = p.style;
     card.dataset.location = p.location;
+    card.dataset.editing = p.editing;
     card.innerHTML = `
       <img src="${p.src}" alt="${p.title}" loading="lazy">
       <div class="photo-overlay">
@@ -577,8 +581,11 @@ function applyFilters() {
   const iso      = document.getElementById('f-iso').value;
   const film     = document.getElementById('f-film').value;
   const year     = document.getElementById('f-year').value;
+  const season   = document.getElementById('f-season').value;
   const subject  = document.getElementById('f-subject').value;
+  const style    = document.getElementById('f-style').value;
   const location = document.getElementById('f-location').value;
+  const editing  = document.getElementById('f-editing').value;
 
   const cards = document.querySelectorAll('.photo-card');
   let visible = 0;
@@ -588,8 +595,11 @@ function applyFilters() {
       (!iso      || card.dataset.iso      === iso)      &&
       (!film     || card.dataset.film     === film)     &&
       (!year     || card.dataset.year     === year)     &&
+      (!season   || card.dataset.season   === season)   &&
       (!subject  || card.dataset.subject  === subject)  &&
-      (!location || card.dataset.location === location);
+      (!style    || card.dataset.style    === style)    &&
+      (!location || card.dataset.location === location) &&
+      (!editing  || card.dataset.editing  === editing);
 
     card.classList.toggle('hidden', !match);
     if (match) visible++;
@@ -600,7 +610,7 @@ function applyFilters() {
 }
 
 function resetFilters() {
-  ['f-iso','f-film','f-year','f-subject','f-location'].forEach(id => {
+  ['f-iso','f-film','f-year','f-season','f-subject','f-style','f-location','f-editing'].forEach(id => {
     document.getElementById(id).value = '';
   });
   applyFilters();
@@ -614,7 +624,7 @@ function openLightbox(idx) {
   document.getElementById('lb-img').src = p.src;
   document.getElementById('lb-title').textContent = p.title;
   document.getElementById('lb-tags').innerHTML = [
-    `ISO ${p.iso}`, p.film, p.year, p.subject, p.location
+    `ISO ${p.iso}`, p.film, p.year, p.season, p.subject, p.style, p.location, p.editing
   ].map(t => `<span class="meta-tag">${t}</span>`).join('');
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
