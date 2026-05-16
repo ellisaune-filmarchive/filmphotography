@@ -381,7 +381,6 @@
     <span class="filter-label">Subject</span>
     <select id="f-subject" onchange="applyFilters()">
       <option value="">All</option>
-      <option>Portrait</option>
       <option>Landscape</option>
       <option>Animals</option>
       <option>Dogs</option>
@@ -401,6 +400,7 @@
       <option>Black&amp;White</option>
       <option>Nature</option>
       <option>Macro</option>
+      <option>Portrait</option>
     </select>
   </div>
 
@@ -466,22 +466,22 @@
 // ─────────────────────────────────────────────────────────
 const photos = [
   {
-    title: "Morning Light",
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
-    iso: "100", film: "Kodak Professional", year: "2024", season: "Winter",
-    subject: "Mountains", style: "Nature", location: "Alps", editing: "Raw"
+    title: "Araucaria",
+    src: "images/000020380007.jpg",
+    iso: "200", film: "Lucky", year: "2026", season: "Spring",
+    subject: "Landscape", style: "Nature", location: "Brazil", editing: "Raw"
   },
   {
-    title: "Old Town",
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
-    iso: "400", film: "Ilford", year: "2023", season: "Fall",
-    subject: "Cities", style: "Framing", location: "Netherlands", editing: "Edited"
+    title: "Araucaria",
+    src: "images/000020380013.jpg",
+    iso: "200", film: "Lucky", year: "2026", season: "Spring",
+    subject: "Landscape", style: "Portrait", location: "Brazil", editing: "Raw"
   },
   {
-    title: "Sunlit Portrait",
-    src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800",
-    iso: "200", film: "Kodak UltraMax", year: "2026", season: "Summer",
-    subject: "Portrait", style: "Macro", location: "Netherlands", editing: "Raw"
+    title: "Fazenda Horse",
+    src: "images/000020380025.jpg",
+    iso: "200", film: "Lucky", year: "2026", season: "Spring",
+    subject: "Animals", location: "Brazil", editing: "Raw"
   }
 ];
 
