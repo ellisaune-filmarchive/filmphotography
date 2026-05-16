@@ -17,9 +17,9 @@
     --tag-active-bg: #c8b89a;
     --tag-active-text: #0e0e0e;
   }
-
+ 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   body {
     background: var(--bg);
     color: var(--text);
@@ -27,7 +27,7 @@
     font-weight: 300;
     min-height: 100vh;
   }
-
+ 
   /* ── HEADER ── */
   header {
     padding: 3rem 4rem 2rem;
@@ -36,14 +36,14 @@
     align-items: baseline;
     gap: 1.5rem;
   }
-
+ 
   header h1 {
     font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 300;
     letter-spacing: 0.08em;
     color: var(--text);
   }
-
+ 
   header span {
     font-family: 'Courier New', monospace;
     font-size: 0.72rem;
@@ -51,7 +51,7 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
   }
-
+ 
   /* ── FILTERS ── */
   .filters-bar {
     padding: 1.6rem 4rem;
@@ -65,13 +65,13 @@
     top: 0;
     z-index: 10;
   }
-
+ 
   .filter-group {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
   }
-
+ 
   .filter-label {
     font-family: 'Courier New', monospace;
     font-size: 0.62rem;
@@ -79,7 +79,7 @@
     text-transform: uppercase;
     color: var(--muted);
   }
-
+ 
   select {
     background: transparent;
     border: 1px solid var(--border);
@@ -97,23 +97,23 @@
     background-position: right 0.7rem center;
     transition: border-color 0.2s;
   }
-
+ 
   select:hover, select:focus {
     border-color: var(--accent-dim);
     outline: none;
   }
-
+ 
   select option {
     background: #1a1a1a;
     color: var(--text);
   }
-
+ 
   .filter-actions {
     display: flex;
     align-items: flex-end;
     padding-bottom: 0.05rem;
   }
-
+ 
   .btn-reset {
     font-family: 'Courier New', monospace;
     font-size: 0.65rem;
@@ -126,12 +126,12 @@
     cursor: pointer;
     transition: color 0.2s, border-color 0.2s;
   }
-
+ 
   .btn-reset:hover {
     color: var(--accent);
     border-color: var(--accent-dim);
   }
-
+ 
   /* ── RESULTS COUNT ── */
   .results-bar {
     padding: 1rem 4rem;
@@ -144,7 +144,7 @@
     justify-content: space-between;
     align-items: center;
   }
-
+ 
   /* ── GRID ── */
   .grid {
     padding: 0.5rem 4rem 6rem;
@@ -152,7 +152,7 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2px;
   }
-
+ 
   .photo-card {
     position: relative;
     overflow: hidden;
@@ -160,7 +160,7 @@
     background: var(--surface);
     cursor: pointer;
   }
-
+ 
   .photo-card img {
     width: 100%;
     height: 100%;
@@ -169,12 +169,12 @@
     transition: transform 0.6s ease, filter 0.4s ease;
     filter: brightness(0.88);
   }
-
+ 
   .photo-card:hover img {
     transform: scale(1.04);
     filter: brightness(1);
   }
-
+ 
   .photo-overlay {
     position: absolute;
     inset: 0;
@@ -187,24 +187,24 @@
     padding: 1.2rem;
     gap: 0.4rem;
   }
-
+ 
   .photo-card:hover .photo-overlay {
     opacity: 1;
   }
-
+ 
   .overlay-title {
     font-size: 1.05rem;
     font-weight: 300;
     letter-spacing: 0.04em;
     color: #fff;
   }
-
+ 
   .overlay-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.3rem;
   }
-
+ 
   .meta-tag {
     font-family: 'Courier New', monospace;
     font-size: 0.6rem;
@@ -215,7 +215,7 @@
     border: 1px solid rgba(200,184,154,0.3);
     padding: 0.15rem 0.45rem;
   }
-
+ 
   /* ── EMPTY STATE ── */
   .empty-state {
     grid-column: 1/-1;
@@ -223,7 +223,7 @@
     text-align: center;
     color: var(--muted);
   }
-
+ 
   .empty-state p:first-child {
     font-size: 2.5rem;
     font-weight: 300;
@@ -231,14 +231,14 @@
     margin-bottom: 0.8rem;
     color: var(--border);
   }
-
+ 
   .empty-state p:last-child {
     font-family: 'Courier New', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
   }
-
+ 
   /* ── LIGHTBOX ── */
   .lightbox {
     display: none;
@@ -251,11 +251,11 @@
     padding: 2rem;
     animation: fadeIn 0.25s ease;
   }
-
+ 
   .lightbox.open { display: flex; }
-
+ 
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
+ 
   .lightbox-inner {
     position: relative;
     max-width: 90vw;
@@ -264,34 +264,34 @@
     flex-direction: column;
     gap: 1rem;
   }
-
+ 
   .lightbox-inner img {
     max-width: 100%;
     max-height: 80vh;
     object-fit: contain;
     display: block;
   }
-
+ 
   .lightbox-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
   }
-
+ 
   .lightbox-title {
     font-size: 1.1rem;
     font-weight: 300;
     letter-spacing: 0.05em;
     color: var(--text);
   }
-
+ 
   .lightbox-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.3rem;
   }
-
+ 
   .lightbox-close {
     position: absolute;
     top: -2.5rem;
@@ -305,16 +305,16 @@
     padding: 0.3rem;
     transition: color 0.2s;
   }
-
+ 
   .lightbox-close:hover { color: var(--text); }
-
+ 
   /* ── RESPONSIVE ── */
   @media (max-width: 700px) {
     header, .filters-bar, .results-bar, .grid { padding-left: 1.2rem; padding-right: 1.2rem; }
     .filters-bar { gap: 0.8rem 1.2rem; }
     select { min-width: 120px; }
   }
-
+ 
   /* ── HIDDEN ── */
   .photo-card.hidden {
     display: none;
@@ -322,12 +322,12 @@
 </style>
 </head>
 <body>
-
+ 
 <header>
   <h1>Portfolio</h1>
   <span>Film Photography Archive</span>
 </header>
-
+ 
 <div class="filters-bar">
   <div class="filter-group">
     <span class="filter-label">ISO</span>
@@ -339,12 +339,11 @@
       <option>400</option>
     </select>
   </div>
-
+ 
   <div class="filter-group">
     <span class="filter-label">Film Type</span>
     <select id="f-film" onchange="applyFilters()">
       <option value="">All</option>
-      <option>Lucky</option>
       <option>Kodak Gold</option>
       <option>Kodak UltraMax</option>
       <option>Ilford</option>
@@ -353,7 +352,7 @@
       <option>CineFilm</option>
     </select>
   </div>
-
+ 
   <div class="filter-group">
     <span class="filter-label">Year</span>
     <select id="f-year" onchange="applyFilters()">
@@ -366,7 +365,7 @@
       <option>2026</option>
     </select>
   </div>
-
+ 
   <div class="filter-group">
     <span class="filter-label">Season</span>
     <select id="f-season" onchange="applyFilters()">
@@ -377,11 +376,12 @@
       <option>Winter</option>
     </select>
   </div>
-
+ 
   <div class="filter-group">
     <span class="filter-label">Subject</span>
     <select id="f-subject" onchange="applyFilters()">
       <option value="">All</option>
+      <option>Portrait</option>
       <option>Landscape</option>
       <option>Animals</option>
       <option>Dogs</option>
@@ -392,7 +392,7 @@
       <option>Geometric</option>
     </select>
   </div>
-
+ 
   <div class="filter-group">
     <span class="filter-label">Style</span>
     <select id="f-style" onchange="applyFilters()">
@@ -401,10 +401,9 @@
       <option>Black&amp;White</option>
       <option>Nature</option>
       <option>Macro</option>
-      <option>Portrait</option>
     </select>
   </div>
-
+ 
   <div class="filter-group">
     <span class="filter-label">Location</span>
     <select id="f-location" onchange="applyFilters()">
@@ -422,7 +421,7 @@
       <option>Fontainebleau</option>
     </select>
   </div>
-
+ 
   <div class="filter-group">
     <span class="filter-label">Editing</span>
     <select id="f-editing" onchange="applyFilters()">
@@ -431,20 +430,20 @@
       <option>Edited</option>
     </select>
   </div>
-
+ 
   <div class="filter-actions">
     <button class="btn-reset" onclick="resetFilters()">Reset</button>
   </div>
 </div>
-
+ 
 <div class="results-bar">
   <span id="results-count">0 photos</span>
 </div>
-
+ 
 <div class="grid" id="grid">
   <!-- Cards are injected by JS -->
 </div>
-
+ 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <div class="lightbox-inner">
@@ -456,7 +455,7 @@
     </div>
   </div>
 </div>
-
+ 
 <script>
 // ─────────────────────────────────────────────────────────
 //  PHOTO DATA
@@ -583,6 +582,15 @@ const photos = [
 ];
 
 // ─────────────────────────────────────────────────────────
+//  HELPERS
+//  Tags can be a single string or an array of strings.
+//  toArr normalises both to an array for consistent handling.
+// ─────────────────────────────────────────────────────────
+function toArr(val) {
+  return Array.isArray(val) ? val : [val];
+}
+ 
+// ─────────────────────────────────────────────────────────
 //  RENDER
 // ─────────────────────────────────────────────────────────
 function buildGrid() {
@@ -591,20 +599,23 @@ function buildGrid() {
   photos.forEach((p, i) => {
     const card = document.createElement('div');
     card.className = 'photo-card';
-    card.dataset.iso = p.iso;
-    card.dataset.film = p.film;
-    card.dataset.year = p.year;
-    card.dataset.season = p.season;
-    card.dataset.subject = p.subject;
-    card.dataset.style = p.style;
-    card.dataset.location = p.location;
-    card.dataset.editing = p.editing;
+    // Store multi-value fields as JSON so we can parse them in applyFilters
+    card.dataset.iso      = p.iso;
+    card.dataset.film     = p.film;
+    card.dataset.year     = p.year;
+    card.dataset.season   = JSON.stringify(toArr(p.season));
+    card.dataset.subject  = JSON.stringify(toArr(p.subject));
+    card.dataset.style    = JSON.stringify(toArr(p.style));
+    card.dataset.location = JSON.stringify(toArr(p.location));
+    card.dataset.editing  = p.editing;
+ 
+    const locationDisplay = toArr(p.location).join(', ');
     card.innerHTML = `
       <img src="${p.src}" alt="${p.title}" loading="lazy">
       <div class="photo-overlay">
         <span class="overlay-title">${p.title}</span>
         <div class="overlay-meta">
-          <span class="meta-tag">${p.location}</span>
+          <span class="meta-tag">${locationDisplay}</span>
           <span class="meta-tag">${p.year}</span>
           <span class="meta-tag">${p.film}</span>
           <span class="meta-tag">ISO ${p.iso}</span>
@@ -616,7 +627,7 @@ function buildGrid() {
   });
   applyFilters();
 }
-
+ 
 // ─────────────────────────────────────────────────────────
 //  FILTER
 // ─────────────────────────────────────────────────────────
@@ -629,36 +640,43 @@ function applyFilters() {
   const style    = document.getElementById('f-style').value;
   const location = document.getElementById('f-location').value;
   const editing  = document.getElementById('f-editing').value;
-
+ 
   const cards = document.querySelectorAll('.photo-card');
   let visible = 0;
-
+ 
   cards.forEach(card => {
+    // For multi-value fields, check if the selected filter value is included in the array
+    const matchMulti = (filterVal, datasetKey) => {
+      if (!filterVal) return true;
+      const arr = JSON.parse(card.dataset[datasetKey]);
+      return arr.includes(filterVal);
+    };
+ 
     const match =
-      (!iso      || card.dataset.iso      === iso)      &&
-      (!film     || card.dataset.film     === film)     &&
-      (!year     || card.dataset.year     === year)     &&
-      (!season   || card.dataset.season   === season)   &&
-      (!subject  || card.dataset.subject  === subject)  &&
-      (!style    || card.dataset.style    === style)    &&
-      (!location || card.dataset.location === location) &&
-      (!editing  || card.dataset.editing  === editing);
-
+      (!iso     || card.dataset.iso     === iso)  &&
+      (!film    || card.dataset.film    === film)  &&
+      (!year    || card.dataset.year    === year)  &&
+      (!editing || card.dataset.editing === editing) &&
+      matchMulti(season,   'season')   &&
+      matchMulti(subject,  'subject')  &&
+      matchMulti(style,    'style')    &&
+      matchMulti(location, 'location');
+ 
     card.classList.toggle('hidden', !match);
     if (match) visible++;
   });
-
+ 
   const count = document.getElementById('results-count');
   count.textContent = `${visible} photo${visible !== 1 ? 's' : ''}`;
 }
-
+ 
 function resetFilters() {
   ['f-iso','f-film','f-year','f-season','f-subject','f-style','f-location','f-editing'].forEach(id => {
     document.getElementById(id).value = '';
   });
   applyFilters();
 }
-
+ 
 // ─────────────────────────────────────────────────────────
 //  LIGHTBOX
 // ─────────────────────────────────────────────────────────
@@ -666,23 +684,31 @@ function openLightbox(idx) {
   const p = photos[idx];
   document.getElementById('lb-img').src = p.src;
   document.getElementById('lb-title').textContent = p.title;
-  document.getElementById('lb-tags').innerHTML = [
-    `ISO ${p.iso}`, p.film, p.year, p.season, p.subject, p.style, p.location, p.editing
-  ].map(t => `<span class="meta-tag">${t}</span>`).join('');
+  // Flatten all tags (single or array) into individual badge chips
+  const allTags = [
+    `ISO ${p.iso}`, p.film, p.year,
+    ...toArr(p.season),
+    ...toArr(p.subject),
+    ...toArr(p.style),
+    ...toArr(p.location),
+    p.editing
+  ];
+  document.getElementById('lb-tags').innerHTML = allTags
+    .map(t => `<span class="meta-tag">${t}</span>`).join('');
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
+ 
 function closeLightbox(e) {
   if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lightbox-close')) return;
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-
+ 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')});
 });
-
+ 
 // ─────────────────────────────────────────────────────────
 //  INIT
 // ─────────────────────────────────────────────────────────
