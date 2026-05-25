@@ -381,7 +381,6 @@
     <span class="filter-label">Subject</span>
     <select id="f-subject" onchange="applyFilters()">
       <option value="">All</option>
-      <option>Portrait</option>
       <option>Landscape</option>
       <option>Animals</option>
       <option>Dogs</option>
@@ -730,7 +729,7 @@ const photos = [
   title: "Day on the Boat",
   src: "images/2025SummerKodakGold200-2/000087640002.jpg",
   iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "Framing", location: "Northern France", editing: "Raw"
+  style: ["Framing", "Portrait"], location: "Northern France", editing: "Raw"
   },
   {
   title: "Saint Malo Coastal Window",
@@ -754,7 +753,7 @@ const photos = [
   title: "The Fisherman",
   src: "images/2025SummerKodakGold200-2/000087640004.jpg",
   iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "Framing", location: "Northern France", editing: "Raw"
+  style: ["Framing", "Portrait"], location: "Northern France", editing: "Raw"
   },
   {
   title: "Barn & Motorcycle in Normandy",
@@ -775,16 +774,14 @@ const photos = [
   subject: ["Water", "Mountains"], style: "Nature", location: "US - Colorado", editing: "Raw"
   },
   {
-  title: "Garden Portrait",
+  title: "Garden Drinks in the Black Forest",
   src: "images/2025SummerKodakGold200-3/000087620017.jpg",
-  iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "", location: "Germany", editing: "Raw"
+  iso: "200", film: "Kodak Gold", year: "2025", season: "Summer", style: "Portrait", location: "Germany", editing: "Raw"
   },
   {
-  title: "Biergarten",
+  title: "Black Forest Biergarten",
   src: "images/2025SummerKodakGold200-3/000087620033.jpg",
-  iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "", location: "Germany", editing: "Raw"
+  iso: "200", film: "Kodak Gold", year: "2025", season: "Summer", style: "Portrait", location: "Germany", editing: "Raw"
   },
   {
   title: "Baden-Baden Panorama Trail",
@@ -802,7 +799,7 @@ const photos = [
   title: "Lunch on the Beach",
   src: "images/2025SummerKodakGold200-3/000087620010.jpg",
   iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "", location: "Netherlands", editing: "Raw"
+  style: "Portrait", location: "Netherlands", editing: "Raw"
   },
   {
   title: "Summer Walk in the Dunes, West Coast Beach",
@@ -868,13 +865,13 @@ const photos = [
   title: "Golden Hour in Fontainebleau",
   src: "images/2025SummerKodakGold200-4/000087630019.jpg",
   iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "", location: "Fontainebleau", editing: "Raw"
+  style: "Portrait", location: "Fontainebleau", editing: "Raw"
   },
   {
   title: "Fontainebleau Dinner",
   src: "images/2025SummerKodakGold200-4/000087630025.jpg",
   iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "", location: "Fontainebleau", editing: "Raw"
+  style: "Portrait", location: "Fontainebleau", editing: "Raw"
   },
   {
   title: "French Square",
@@ -883,16 +880,82 @@ const photos = [
   subject: "Cities", style: "", location: "Fontainebleau", editing: "Raw"
   },
   {
-  title: "Send It",
+  title: "Dialed In",
   src: "images/2025SummerKodakGold200-4/000087630005.jpg",
   iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
   subject: ["Portrait", "Climbing"], style: "Framing", location: "Fontainebleau", editing: "Raw"
   },
   {
-  title: "Hammock",
+  title: "Summer Forest Nap",
   src: "images/2025SummerKodakGold200-4/000087630011.jpg",
   iso: "200", film: "Kodak Gold", year: "2025", season: "Summer",
-  subject: "Portrait", style: "Nature", location: "Fontainebleau", editing: "Raw"
+  style: ["Nature", "Portrait"], location: "Fontainebleau", editing: "Raw"
+  },
+  {
+  title: "Karlsruhe Afternoon",
+  src: "images/2025SummerCineFilm50/000087610004.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: "Cities", location: "Germany", editing: "Raw"
+  },
+  {
+  title: "Karlsruhe Afternoon",
+  src: "images/2025SummerCineFilm50/000087610004.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  style: ["Nature", "Portrait"], location: "Germany", editing: "Raw"
+  },
+  {
+  title: "Karlsruhe Afternoon",
+  src: "images/2025SummerCineFilm50/000087610006.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  style: "Portrait", location: "Germany", editing: "Raw"
+  },
+  {
+  title: "S Pearl, Denver",
+  src: "images/2025SummerCineFilm50/000087610010.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: "Cities", location: "US - Colorado", editing: "Raw"
+  },
+  {
+  title: "Coco in the Sun",
+  src: "images/2025SummerCineFilm50/000087610011.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: "Dogs", location: "US - Colorado", editing: "Raw"
+  },
+  {
+  title: "Coco in the Sun 2",
+  src: "images/2025SummerCineFilm50/000087610013.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: "Dogs", location: "US - Colorado", editing: "Raw"
+  },
+  {
+  title: "Boulder Sunset",
+  src: "images/2025SummerCineFilm50/000087610020.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: "", style: "Portrait", location: "US - Colorado", editing: "Raw"
+  },
+  {
+  title: "Boulder Sunset",
+  src: "images/2025SummerCineFilm50/000087610024.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: ["Mountains", "Landscape"], style: "Nature", location: "US - Colorado", editing: "Raw"
+  },
+  {
+  title: "Boulder Sunset",
+  src: "images/2025SummerCineFilm50/000087610026.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: ["Mountains", "Landscape"], style: "Nature", location: "US - Colorado", editing: "Raw"
+  },
+  {
+  title: "Red Rocks Dogs",
+  src: "images/2025SummerCineFilm50/000087610027.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: "Dogs", style: "", location: "US - Colorado", editing: "Raw"
+  },
+  {
+  title: "Red Rocks Flowers",
+  src: "images/2025SummerCineFilm50/000087610030.jpg",
+  iso: "50", film: "CineFilm", year: "2025", season: "Summer",
+  subject: "Landscape", style: "Nature", location: "US - Colorado", editing: "Raw"
   },
 ];
 
