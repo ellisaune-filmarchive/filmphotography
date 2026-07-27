@@ -153,6 +153,50 @@
     color: var(--accent);
     border-color: var(--accent-dim);
   }
+
+  .chrono-control {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .chrono-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .chrono-label input[type="checkbox"] {
+    accent-color: var(--accent);
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+  }
+
+  .btn-chrono-dir {
+    font-family: 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.45rem 0.6rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-chrono-dir:hover {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+  }
  
   /* ── RESULTS COUNT ── */
   .results-bar {
@@ -466,6 +510,17 @@
     </select>
   </div>
  
+  <div class="filter-group">
+    <span class="filter-label">Order</span>
+    <div class="chrono-control">
+      <label class="chrono-label">
+        <input type="checkbox" id="f-chrono" onchange="applyFilters()">
+        Chronological
+      </label>
+      <button type="button" class="btn-chrono-dir" id="chrono-dir-btn" onclick="toggleChronoDirection()">Newest → Oldest</button>
+    </div>
+  </div>
+
   <div class="filter-actions">
     <button class="btn-reset" onclick="resetFilters()">Reset</button>
   </div>
@@ -2273,7 +2328,24 @@ const photos = [
 function toArr(val) {
   return Array.isArray(val) ? val : [val];
 }
- 
+
+const SEASON_ORDER = { Spring: 0, Summer: 1, Fall: 2, Winter: 3 };
+
+// Combines year + season into a single sortable number, e.g. 2021 Summer -> 20211
+function chronoSortKey(p) {
+  const season = toArr(p.season)[0] || 'Spring';
+  return parseInt(p.year, 10) * 10 + (SEASON_ORDER[season] ?? 0);
+}
+
+let chronoDir = 'desc'; // 'desc' = newest first, 'asc' = oldest first
+
+function toggleChronoDirection() {
+  chronoDir = chronoDir === 'desc' ? 'asc' : 'desc';
+  document.getElementById('chrono-dir-btn').textContent =
+    chronoDir === 'desc' ? 'Newest → Oldest' : 'Oldest → Newest';
+  applyFilters();
+}
+
 // ─────────────────────────────────────────────────────────
 //  RENDER
 // ─────────────────────────────────────────────────────────
@@ -2293,6 +2365,7 @@ function buildGrid() {
     card.dataset.location = JSON.stringify(toArr(p.location));
     card.dataset.editing  = p.editing;
     card.dataset.title    = p.title.toLowerCase();
+    card.dataset.sortkey  = chronoSortKey(p);
  
     const locationDisplay = toArr(p.location).join(', ');
     card.innerHTML = `
@@ -2352,7 +2425,19 @@ function applyFilters() {
     card.classList.toggle('hidden', !match);
     if (match) visible++;
   });
- 
+
+  const chronological = document.getElementById('f-chrono').checked;
+  if (chronological) {
+    const sorted = Array.from(cards).sort((a, b) => {
+      const ka = parseInt(a.dataset.sortkey, 10);
+      const kb = parseInt(b.dataset.sortkey, 10);
+      return chronoDir === 'desc' ? kb - ka : ka - kb;
+    });
+    sorted.forEach((card, i) => { card.style.order = i; });
+  } else {
+    cards.forEach(card => { card.style.order = ''; });
+  }
+
   const count = document.getElementById('results-count');
   count.textContent = `${visible} photo${visible !== 1 ? 's' : ''}`;
 }
@@ -2361,6 +2446,9 @@ function resetFilters() {
   ['f-search','f-iso','f-film','f-year','f-season','f-subject','f-style','f-location','f-editing'].forEach(id => {
     document.getElementById(id).value = '';
   });
+  document.getElementById('f-chrono').checked = false;
+  chronoDir = 'desc';
+  document.getElementById('chrono-dir-btn').textContent = 'Newest → Oldest';
   applyFilters();
 }
  
