@@ -102,6 +102,28 @@
     border-color: var(--accent-dim);
     outline: none;
   }
+
+  #f-search {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    padding: 0.4rem 0.7rem;
+    min-width: 160px;
+    transition: border-color 0.2s;
+  }
+
+  #f-search::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  #f-search:hover, #f-search:focus {
+    border-color: var(--accent-dim);
+    outline: none;
+  }
  
   select option {
     background: #1a1a1a;
@@ -329,6 +351,11 @@
 </header>
  
 <div class="filters-bar">
+  <div class="filter-group">
+    <span class="filter-label">Search</span>
+    <input type="text" id="f-search" placeholder="Search titles..." oninput="applyFilters()">
+  </div>
+
   <div class="filter-group">
     <span class="filter-label">ISO</span>
     <select id="f-iso" onchange="applyFilters()">
@@ -2265,6 +2292,7 @@ function buildGrid() {
     card.dataset.style    = JSON.stringify(toArr(p.style));
     card.dataset.location = JSON.stringify(toArr(p.location));
     card.dataset.editing  = p.editing;
+    card.dataset.title    = p.title.toLowerCase();
  
     const locationDisplay = toArr(p.location).join(', ');
     card.innerHTML = `
@@ -2289,6 +2317,7 @@ function buildGrid() {
 //  FILTER
 // ─────────────────────────────────────────────────────────
 function applyFilters() {
+  const search   = document.getElementById('f-search').value.trim().toLowerCase();
   const iso      = document.getElementById('f-iso').value;
   const film     = document.getElementById('f-film').value;
   const year     = document.getElementById('f-year').value;
@@ -2310,6 +2339,7 @@ function applyFilters() {
     };
  
     const match =
+      (!search  || card.dataset.title.includes(search)) &&
       (!iso     || card.dataset.iso     === iso)  &&
       (!film    || card.dataset.film    === film)  &&
       (!year    || card.dataset.year    === year)  &&
@@ -2328,7 +2358,7 @@ function applyFilters() {
 }
  
 function resetFilters() {
-  ['f-iso','f-film','f-year','f-season','f-subject','f-style','f-location','f-editing'].forEach(id => {
+  ['f-search','f-iso','f-film','f-year','f-season','f-subject','f-style','f-location','f-editing'].forEach(id => {
     document.getElementById(id).value = '';
   });
   applyFilters();
